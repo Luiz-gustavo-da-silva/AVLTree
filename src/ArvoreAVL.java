@@ -57,30 +57,30 @@ public class ArvoreAVL {
     }
 
 
-    private NoAVL rotacaoDireita(NoAVL y) {
-        NoAVL x = y.esquerda;
-        NoAVL T2 = x.direita;
+    private NoAVL rotacaoDireita(NoAVL noRaiz) {
+        NoAVL noNovoRaiz = noRaiz.esquerda;
+        NoAVL subarvoreDireita = noNovoRaiz.direita;
 
-        x.direita = y;
-        y.esquerda = T2;
+        noNovoRaiz.direita = noRaiz;
+        noRaiz.esquerda = subarvoreDireita;
 
-        y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
-        x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
+        noRaiz.altura = Math.max(altura(noRaiz.esquerda), altura(noRaiz.direita)) + 1;
+        noNovoRaiz.altura = Math.max(altura(noNovoRaiz.esquerda), altura(noNovoRaiz.direita)) + 1;
 
-        return x;
+        return noNovoRaiz;
     }
 
-    private NoAVL rotacaoEsquerda(NoAVL x) {
-        NoAVL y = x.direita;
-        NoAVL T2 = y.esquerda;
+    private NoAVL rotacaoEsquerda(NoAVL noRaiz) {
+        NoAVL noNovoRaiz = noRaiz.direita;
+        NoAVL subarvoreEsquerda = noNovoRaiz.esquerda;
 
-        y.esquerda = x;
-        x.direita = T2;
+        noNovoRaiz.esquerda = noRaiz;
+        noRaiz.direita = subarvoreEsquerda;
 
-        x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
-        y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
+        noRaiz.altura = Math.max(altura(noRaiz.esquerda), altura(noRaiz.direita)) + 1;
+        noNovoRaiz.altura = Math.max(altura(noNovoRaiz.esquerda), altura(noNovoRaiz.direita)) + 1;
 
-        return y;
+        return noNovoRaiz;
     }
 
     public Reserva buscarReserva(int codigo) {
