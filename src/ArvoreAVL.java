@@ -13,31 +13,6 @@ public class ArvoreAVL {
         return no == null ? 0 : altura(no.esquerda) - altura(no.direita);
     }
 
-    private NoAVL rotacaoDireita(NoAVL y) {
-        NoAVL x = y.esquerda;
-        NoAVL T2 = x.direita;
-
-        x.direita = y;
-        y.esquerda = T2;
-
-        y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
-        x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
-
-        return x;
-    }
-
-    private NoAVL rotacaoEsquerda(NoAVL x) {
-        NoAVL y = x.direita;
-        NoAVL T2 = y.esquerda;
-
-        y.esquerda = x;
-        x.direita = T2;
-
-        x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
-        y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
-
-        return y;
-    }
 
     public void inserirReserva(Reserva reserva) {
         raiz = inserirNo(raiz, reserva);
@@ -81,6 +56,33 @@ public class ArvoreAVL {
         return no;
     }
 
+
+    private NoAVL rotacaoDireita(NoAVL y) {
+        NoAVL x = y.esquerda;
+        NoAVL T2 = x.direita;
+
+        x.direita = y;
+        y.esquerda = T2;
+
+        y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
+        x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
+
+        return x;
+    }
+
+    private NoAVL rotacaoEsquerda(NoAVL x) {
+        NoAVL y = x.direita;
+        NoAVL T2 = y.esquerda;
+
+        y.esquerda = x;
+        x.direita = T2;
+
+        x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
+        y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
+
+        return y;
+    }
+
     public Reserva buscarReserva(int codigo) {
         NoAVL no = buscarNo(raiz, codigo);
         return no == null ? null : no.reserva;
@@ -98,6 +100,7 @@ public class ArvoreAVL {
         }
     }
 
+
     public void removerReserva(int codigo) {
         raiz = removerNo(raiz, codigo);
     }
@@ -106,7 +109,6 @@ public class ArvoreAVL {
         if (no == null) {
             return no;
         }
-
         if (codigo < no.reserva.getCodigo()) {
             no.esquerda = removerNo(no.esquerda, codigo);
         } else if (codigo > no.reserva.getCodigo()) {
@@ -130,6 +132,7 @@ public class ArvoreAVL {
                 no.reserva = temp.reserva;
                 no.direita = removerNo(no.direita, temp.reserva.getCodigo());
             }
+
         }
 
         if (no == null) {
